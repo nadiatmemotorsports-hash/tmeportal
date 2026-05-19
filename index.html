@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>TME Motors — Staff Portal</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/dist/tabler-icons.min.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Barlow:wght@400;500;600;700&family=Barlow+Condensed:wght@600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+
+  <!-- HEADER -->
+  <header class="hdr">
+    <div class="hdr-logo">
+      <img src="assets/logo.png" alt="TME Motors" class="logo-img" />
+    </div>
+    <div class="hdr-r">
+      <span class="obadge" id="obadge">TME 003 Skudai</span>
+      <span class="hdr-clock" id="clk"></span>
+      <div class="hdr-av" title="Staff">ST</div>
+    </div>
+  </header>
+
+  <div class="layout">
+
+    <!-- SIDEBAR -->
+    <nav class="sb">
+      <div class="sb-sec">
+        <div class="sb-lbl">Main</div>
+        <div class="sb-item active" data-page="home"><i class="ti ti-home"></i> Home</div>
+        <div class="sb-item" data-page="announcements"><i class="ti ti-speakerphone"></i> Announcements <span class="sb-badge" id="annoBadge">0</span></div>
+        <div class="sb-item" data-page="memo"><i class="ti ti-file-text"></i> Memo</div>
+      </div>
+      <hr class="sb-div" />
+      <div class="sb-sec">
+        <div class="sb-lbl">Forms</div>
+        <div class="sb-item" data-page="formc"><i class="ti ti-forms"></i> Form C</div>
+        <div class="sb-item" data-page="formp"><i class="ti ti-file-plus"></i> Form P</div>
+        <div class="sb-item" data-page="cx"><i class="ti ti-mood-smile"></i> Customer Experience</div>
+      </div>
+      <hr class="sb-div" />
+      <div class="sb-sec">
+        <div class="sb-lbl">Operations</div>
+        <div class="sb-item" data-page="stock"><i class="ti ti-package"></i> Stock Check</div>
+        <div class="sb-item" data-page="focamm"><i class="ti ti-clipboard-check"></i> FOCAMM & KMP</div>
+      </div>
+      <hr class="sb-div" />
+      <div class="sb-sec">
+        <div class="sb-lbl">Support</div>
+        <div class="sb-item" data-page="help"><i class="ti ti-help-circle"></i> Help</div>
+      </div>
+      <div class="sb-foot">TME Motors &copy; <span id="year"></span></div>
+    </nav>
+
+    <!-- MAIN -->
+    <main class="main">
+
+      <!-- OUTLET TABS -->
+      <div class="outlet-tabs" id="outletTabs"></div>
+
+      <!-- PAGE: HOME -->
+      <section id="pg-home" class="page active">
+        <div class="hero">
+          <div class="hero-t">
+            <div class="hero-greet">Welcome,</div>
+            <div class="hero-name">Portal <span id="heroOutlet">TME 003 Skudai</span></div>
+            <div class="hero-sub" id="heroDate"></div>
+          </div>
+          <div class="hero-stats">
+            <div class="hstat"><div class="v" id="statNotices">0</div><div class="l">Notices</div></div>
+            <div class="hstat"><div class="v" id="statMemo">0</div><div class="l">Memo</div></div>
+          </div>
+        </div>
+
+        <div class="sec-title">Sales Summary</div>
+        <div class="sales-grid">
+          <div class="scard"><div class="lbl">Unit Sold per Day</div><div class="val" id="s-unitday">—</div><div class="sub">Today</div></div>
+          <div class="scard"><div class="lbl">Total SO</div><div class="val" id="s-totalso">—</div><div class="sub">Month to date</div></div>
+          <div class="scard"><div class="lbl">Target</div><div class="val" id="s-target">—</div><div class="sub">Monthly target</div></div>
+          <div class="scard"><div class="lbl">Achievement per SA</div><div class="val" id="s-achv">—</div><div class="sub">Units / SA avg</div></div>
+        </div>
+
+        <div class="sec-title">Achievement by SA</div>
+        <div class="table-wrap">
+          <div class="table-head">
+            <div class="table-title"><i class="ti ti-user"></i> Sales Advisor Performance</div>
+            <span class="table-sub">MTD · <span id="saPeriod"></span></span>
+          </div>
+          <div class="table-scroll">
+            <table class="data-table">
+              <thead>
+                <tr>
+                  <th>SA Name</th>
+                  <th>Unit Sold / Day</th>
+                  <th>Total SO</th>
+                  <th>Target</th>
+                  <th>Achievement</th>
+                </tr>
+              </thead>
+              <tbody id="saTableBody"><tr><td colspan="5" class="empty-row">Loading...</td></tr></tbody>
+            </table>
+          </div>
+        </div>
+
+        <div class="two-col" style="margin-top:20px">
+          <div class="card">
+            <div class="ch">
+              <div class="ct"><i class="ti ti-speakerphone"></i> Latest Announcements</div>
+              <span class="ca" onclick="navigate('announcements')">View all</span>
+            </div>
+            <div id="homeAnnoList"><div class="empty-row">Loading...</div></div>
+          </div>
+          <div class="card">
+            <div class="ch">
+              <div class="ct"><i class="ti ti-file-text"></i> Latest Memo</div>
+              <span class="ca" onclick="navigate('memo')">View all</span>
+            </div>
+            <div id="homeMemoList"><div class="empty-row">Loading...</div></div>
+          </div>
+        </div>
+      </section>
+
+      <!-- PAGE: ANNOUNCEMENTS -->
+      <section id="pg-announcements" class="page">
+        <div class="sec-title">All Announcements</div>
+        <div class="card">
+          <div class="ch">
+            <div class="ct"><i class="ti ti-speakerphone"></i> Announcements — Google Sheets</div>
+            <span class="ca" onclick="loadAnnouncements()"><i class="ti ti-refresh"></i> Refresh</span>
+          </div>
+          <div id="fullAnnoList"><div class="empty-row">Loading...</div></div>
+        </div>
+      </section>
+
+      <!-- PAGE: MEMO -->
+      <section id="pg-memo" class="page">
+        <div class="sec-title">All Memo — Google Drive</div>
+        <div class="card">
+          <div class="ch">
+            <div class="ct"><i class="ti ti-file-text"></i> Memo Folder</div>
+            <a class="ca" href="https://drive.google.com/drive/folders/1H_27ObzuosqjGBV6N_7aMw1ngHUIAa8x" target="_blank">Open Drive <i class="ti ti-external-link"></i></a>
+          </div>
+          <div id="fullMemoList"><div class="empty-row">Loading...</div></div>
+        </div>
+      </section>
+
+      <!-- PAGE: FORM C -->
+      <section id="pg-formc" class="page">
+        <div class="sec-title">Form C</div>
+        <div class="info-banner"><i class="ti ti-info-circle"></i> Opens your Google Script. Add URL in <code>js/config.js</code> → LINKS.FORM_C_NEW</div>
+        <div class="form-cards">
+          <a class="fcard" id="link-formc-new" href="#" target="_blank">
+            <div class="ficon r"><i class="ti ti-forms"></i></div>
+            <div><div class="fname">New Form C</div><div class="fdesc">Submit a new form</div></div>
+            <i class="ti ti-external-link fext"></i>
+          </a>
+          <a class="fcard" id="link-formc-rec" href="#" target="_blank">
+            <div class="ficon n"><i class="ti ti-history"></i></div>
+            <div><div class="fname">Form C Records</div><div class="fdesc">View past submissions</div></div>
+            <i class="ti ti-external-link fext"></i>
+          </a>
+        </div>
+      </section>
+
+      <!-- PAGE: FORM P -->
+      <section id="pg-formp" class="page">
+        <div class="sec-title">Form P</div>
+        <div class="info-banner"><i class="ti ti-info-circle"></i> Opens your Google Script. Add URL in <code>js/config.js</code> → LINKS.FORM_P_NEW</div>
+        <div class="form-cards">
+          <a class="fcard" id="link-formp-new" href="#" target="_blank">
+            <div class="ficon b"><i class="ti ti-file-plus"></i></div>
+            <div><div class="fname">New Form P</div><div class="fdesc">Submit a new form</div></div>
+            <i class="ti ti-external-link fext"></i>
+          </a>
+          <a class="fcard" id="link-formp-rec" href="#" target="_blank">
+            <div class="ficon n"><i class="ti ti-history"></i></div>
+            <div><div class="fname">Form P Records</div><div class="fdesc">View past submissions</div></div>
+            <i class="ti ti-external-link fext"></i>
+          </a>
+        </div>
+      </section>
+
+      <!-- PAGE: CUSTOMER EXPERIENCE -->
+      <section id="pg-cx" class="page">
+        <div class="sec-title">Customer Experience</div>
+        <div class="info-banner"><i class="ti ti-info-circle"></i> Opens your Google Script. Add URL in <code>js/config.js</code> → LINKS.CX_LOG</div>
+        <div class="form-cards">
+          <a class="fcard" id="link-cx-log" href="#" target="_blank">
+            <div class="ficon g"><i class="ti ti-mood-smile"></i></div>
+            <div><div class="fname">Log CX</div><div class="fdesc">Record customer experience</div></div>
+            <i class="ti ti-external-link fext"></i>
+          </a>
+          <a class="fcard" id="link-cx-report" href="#" target="_blank">
+            <div class="ficon a"><i class="ti ti-chart-bar"></i></div>
+            <div><div class="fname">CX Report</div><div class="fdesc">Statistics &amp; trends</div></div>
+            <i class="ti ti-external-link fext"></i>
+          </a>
+        </div>
+      </section>
+
+      <!-- PAGE: STOCK CHECK -->
+      <section id="pg-stock" class="page">
+        <div class="sec-title">Stock Check</div>
+        <div class="card">
+          <div class="ch">
+            <div class="ct"><i class="ti ti-package"></i> Current Stock</div>
+            <span class="ca" onclick="loadStock()"><i class="ti ti-refresh"></i> Refresh</span>
+          </div>
+          <div class="table-scroll">
+            <table class="data-table">
+              <thead><tr><th>Item</th><th>Category</th><th>Qty</th><th>Status</th></tr></thead>
+              <tbody id="stockBody"><tr><td colspan="4" class="empty-row">Loading...</td></tr></tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <!-- PAGE: FOCAMM & KMP -->
+      <section id="pg-focamm" class="page">
+        <div class="sec-title">FOCAMM &amp; KMP</div>
+        <div class="info-banner"><i class="ti ti-info-circle"></i> Opens your Google Script. Add URLs in <code>js/config.js</code> → LINKS.FOCAMM / KMP</div>
+        <div class="form-cards">
+          <a class="fcard" id="link-focamm" href="#" target="_blank">
+            <div class="ficon r"><i class="ti ti-clipboard-check"></i></div>
+            <div><div class="fname">FOCAMM</div><div class="fdesc">Checklist &amp; report</div></div>
+            <i class="ti ti-external-link fext"></i>
+          </a>
+          <a class="fcard" id="link-kmp" href="#" target="_blank">
+            <div class="ficon n"><i class="ti ti-file-certificate"></i></div>
+            <div><div class="fname">KMP</div><div class="fdesc">KMP documents</div></div>
+            <i class="ti ti-external-link fext"></i>
+          </a>
+          <a class="fcard" id="link-focamm-rec" href="#" target="_blank">
+            <div class="ficon g"><i class="ti ti-history"></i></div>
+            <div><div class="fname">Past Records</div><div class="fdesc">Previous submissions</div></div>
+            <i class="ti ti-external-link fext"></i>
+          </a>
+        </div>
+      </section>
+
+      <!-- PAGE: HELP -->
+      <section id="pg-help" class="page">
+        <div class="sec-title">Help Centre</div>
+        <div class="help-grid">
+          <div class="hcard"><i class="ti ti-book"></i><div class="hname">User Manual</div><div class="hdesc">Full guide on how to use this portal</div></div>
+          <a class="hcard" id="link-hq-phone" href="tel:07-XXXXXXX"><i class="ti ti-phone"></i><div class="hname">Contact HQ</div><div class="hdesc" id="txt-hq-phone">07-XXXXXXX</div></a>
+          <a class="hcard" id="link-hq-email" href="mailto:support@tmemotors.com.my"><i class="ti ti-mail"></i><div class="hname">Email Support</div><div class="hdesc" id="txt-hq-email">support@tmemotors.com.my</div></a>
+          <a class="hcard" id="link-wa" href="#" target="_blank"><i class="ti ti-brand-whatsapp"></i><div class="hname">WhatsApp IT</div><div class="hdesc">Technical issues &amp; system support</div></a>
+          <div class="hcard" onclick="location.reload()"><i class="ti ti-refresh"></i><div class="hname">Reload Portal</div><div class="hdesc">Refresh all data</div></div>
+          <div class="hcard"><i class="ti ti-bug"></i><div class="hname">Report a Bug</div><div class="hdesc">Report issues in the portal</div></div>
+        </div>
+      </section>
+
+    </main>
+  </div>
+
+  <script src="js/config.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>
